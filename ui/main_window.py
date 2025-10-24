@@ -27,11 +27,47 @@ class Ui_main_window(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.top_bar_widget.sizePolicy().hasHeightForWidth())
         self.top_bar_widget.setSizePolicy(sizePolicy)
-        self.top_bar_widget.setMinimumSize(QtCore.QSize(0, 40))
+        self.top_bar_widget.setMinimumSize(QtCore.QSize(0, 50))
         self.top_bar_widget.setStyleSheet("background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(20, 49, 83, 255), stop:1 rgba(22, 29, 55, 255));\n"
 "border-radius: 15px;\n"
 "")
         self.top_bar_widget.setObjectName("top_bar_widget")
+        self.horizontalLayout = QtWidgets.QHBoxLayout(self.top_bar_widget)
+        self.horizontalLayout.setContentsMargins(10, 5, 10, 5)
+        self.horizontalLayout.setSpacing(10)
+        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.btn_for_back_main_page = QtWidgets.QPushButton(self.top_bar_widget)
+        self.btn_for_back_main_page.setMinimumSize(QtCore.QSize(90, 0))
+        font = QtGui.QFont()
+        font.setFamily("Plus Jakarta Sans")
+        font.setPointSize(11)
+        font.setBold(True)
+        font.setWeight(75)
+        self.btn_for_back_main_page.setFont(font)
+        self.btn_for_back_main_page.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.btn_for_back_main_page.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.btn_for_back_main_page.setStyleSheet("background: rgba(255, 255, 255, 0);\n"
+"color: rgb(255, 255, 255);\n"
+"border-radius: 10px;")
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("../source/img/icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.btn_for_back_main_page.setIcon(icon)
+        self.btn_for_back_main_page.setObjectName("btn_for_back_main_page")
+        self.horizontalLayout.addWidget(self.btn_for_back_main_page)
+        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout.addItem(spacerItem)
+        self.window_title = QtWidgets.QLabel(self.top_bar_widget)
+        font = QtGui.QFont()
+        font.setFamily("Plus Jakarta Sans ExtraBold")
+        font.setPointSize(14)
+        font.setBold(True)
+        font.setWeight(75)
+        self.window_title.setFont(font)
+        self.window_title.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.window_title.setStyleSheet("color: rgb(255, 255, 255);\n"
+"background: rgba(0, 0, 0, 0);")
+        self.window_title.setObjectName("window_title")
+        self.horizontalLayout.addWidget(self.window_title)
         self.verticalLayout.addWidget(self.top_bar_widget)
         self.workspace = QtWidgets.QStackedWidget(self.centralwidget)
         self.workspace.setLayoutDirection(QtCore.Qt.LeftToRight)
@@ -52,6 +88,8 @@ class Ui_main_window(object):
     def retranslateUi(self, main_window):
         _translate = QtCore.QCoreApplication.translate
         main_window.setWindowTitle(_translate("main_window", "MainWindow"))
+        self.btn_for_back_main_page.setText(_translate("main_window", " Inicio"))
+        self.window_title.setText(_translate("main_window", "Página Principal"))
 
 
 if __name__ == "__main__":
