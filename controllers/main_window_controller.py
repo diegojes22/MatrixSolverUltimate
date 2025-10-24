@@ -2,9 +2,11 @@
 from PyQt5.QtWidgets import QMainWindow
 from PyQt5.QtCore import Qt
 
+from controllers.solver_page_controller import SolverPageController
 from ui.main_window import Ui_main_window
 
 from controllers.main_page_controller import MainPageController
+from controllers.navigation_controller import NavigationController
 
 ### Constantes
 MAIN_PAGE_INDEX = 0
@@ -19,6 +21,7 @@ class MainWindowController(QMainWindow, Ui_main_window):
         ''' Constructor '''
         super().__init__(parent)
         self.current_index = MAIN_PAGE_INDEX
+        self.navigation_controller = NavigationController()
 
         # Configuracion automatica de la UI
         self.setupUi(self)
@@ -43,73 +46,32 @@ class MainWindowController(QMainWindow, Ui_main_window):
         """
         Inicializa datos o configuraciones adicionales.
         """
+        # Configuraciones iniciales
+        self.setMinimumSize(800, 600)  # Tamano minimo de la ventana
+
         self._define_pages() # definir las paginas del QStackedWidget
 
     def _define_pages(self):
         """
         Define y configura las páginas del QStackedWidget.
         """
-        # Configuraciones iniciales
-        self._delete_default_pages()   # Borrar paginas vacias creadas por Qt Designer
-        self.setMinimumSize(800, 600)  # Tamano minimo de la ventana
+        self.navigation_controller.register_workspace(self.workspace)
+        self.navigation_controller.register_window_title(self.window_title)
 
-        # Agregar el panel principal al area de trabajo
-        main_page = MainPageController()
-        main_page.setVisible(True)
-        self.workspace.addWidget(main_page)
+        # Página principal
+        main_page = MainPageController(navigation_controller=self.navigation_controller)
+        self.navigation_controller.add_page(main_page)
+
+        # Página del solver
+        solver_page = SolverPageController(navigation_controller=self.navigation_controller)
+        self.navigation_controller.add_page(solver_page)
 
         # Mostrar la página principal al iniciar
-        self.workspace.setCurrentIndex(MAIN_PAGE_INDEX) 
-
-    def _delete_default_pages(self):
-        """
-        Elimina las páginas vacías creadas por Qt Designer.
-        """
-        while self.workspace.count() > 0:
-            widget = self.workspace.widget(0)
-            self.workspace.removeWidget(widget)
-
-    def _set_page_name(self):
-        page_titles = {
-            MAIN_PAGE_INDEX: "Página Principal",
-            SOLVER_PAGE_INDEX: "Página de Resolución",
-            CALCULATOR_PAGE_INDEX: "Página de Cálculo",
-            AI_CHAT_PAGE_INDEX: "Página de Chat AI",
-            HELP_PAGE_INDEX: "Página de Ayuda"
-        }
-        
-        title = page_titles.get(self.current_index, "Página Desconocida")
-        self.window_title.setText(title)
-
-    ### Getters y Setters
-    def set_current_index(self, index):
-        '''
-        Establecer la página actual del QStackedWidget por su índice.
-        '''
-        if(index > self.workspace.count()):
-            print("La pagina marcada por el indice no existe en el espacio de trabajo!")
-            return
-            
-        self.current_index = index
-        self.workspace.setCurrentIndex(index)
-        self._set_page_name()
-
-    def get_current_index(self):
-        '''
-        Obtener el índice de la página actual del QStackedWidget.
-        '''
-        return self.current_index
-    
-    ### Otros
-    def go_to_main_page(self):
-        '''
-        Navegar a la página principal.
-        '''
-        self.set_current_index(MAIN_PAGE_INDEX)
+        self.navigation_controller.set_current_page(MAIN_PAGE_INDEX)
 
     # ==================== MÉTODOS MANEJADORES DE EVENTOS ====================
     def on_click_to_back_for_main_page(self):
-        self.go_to_main_page()
+        self.navigation_controller.set_current_page(MAIN_PAGE_INDEX)
 
     def on_click_to_open_solver_page(self):
         self.set_current_index(SOLVER_PAGE_INDEX)

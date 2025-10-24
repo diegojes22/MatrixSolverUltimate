@@ -8,18 +8,19 @@ from PyQt5.QtCore import Qt
 
 # Importamos la interfaz generada desde la carpeta ui
 from ui.main_page import Ui_main_screen
-
+from controllers.navigation_controller import NavigationController, SOLVER_PAGE_INDEX, CALCULATOR_PAGE_INDEX, AI_CHAT_PAGE_INDEX, HELP_PAGE_INDEX
 
 class MainPageController(QWidget, Ui_main_screen):
     """
     Clase controladora que hereda de QWidget y usa la interfaz generada.
     Aquí va toda tu lógica personalizada.
     """
-    
-    def __init__(self, parent=None):
+
+    def __init__(self, navigation_controller : NavigationController, parent=None):
         super().__init__(parent)
         # Configura la interfaz generada automáticamente
         self.setupUi(self)
+        self.navigation_controller : NavigationController = navigation_controller
         
         # Conecta los eventos a tus métodos
         self._connect_signals()
@@ -57,26 +58,21 @@ class MainPageController(QWidget, Ui_main_screen):
         Se ejecuta cuando el usuario hace clic en "Nuevo problema".
         """
         print("Abriendo solver de matrices...")
-        # Aquí puedes:
-        # - Abrir otra ventana
-        # - Cambiar de panel
-        # - Emitir una señal personalizada
-        # Ejemplo:
-        # self.open_solver_window()
+        self.open_solver_window()
     
     def on_calculator_clicked(self, event):
         """
         Se ejecuta cuando el usuario hace clic en "Calculadora".
         """
         print("Abriendo calculadora...")
-        # Lógica para abrir la calculadora
-    
+        self.open_calculator_window()
+
     def on_chat_clicked(self, event):
         """
         Se ejecuta cuando el usuario hace clic en "Chat Bot".
         """
         print("Abriendo chat bot...")
-        # Lógica para abrir el chat bot
+        self.open_chat_window()
     
     def on_help_clicked(self, event):
         """
@@ -91,20 +87,19 @@ class MainPageController(QWidget, Ui_main_screen):
         """
         Abre la ventana del solver de matrices.
         """
-        # Implementa aquí la lógica para abrir otra ventana
-        pass
+        self.navigation_controller.set_current_page(SOLVER_PAGE_INDEX)
     
     def open_calculator_window(self):
         """
         Abre la ventana de la calculadora.
         """
-        pass
+        self.navigation_controller.set_current_page(CALCULATOR_PAGE_INDEX)
     
     def open_chat_window(self):
         """
         Abre la ventana del chat bot.
         """
-        pass
+        self.navigation_controller.set_current_page(AI_CHAT_PAGE_INDEX)
     
     def show_help_dialog(self):
         """
