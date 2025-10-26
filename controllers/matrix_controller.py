@@ -86,3 +86,13 @@ class MatrixController:
 
     # Aquí puedes agregar métodos específicos para manejar la lógica relacionada con matrices
     # Por ejemplo, métodos para resolver sistemas de ecuaciones, realizar operaciones matriciales, etc.
+
+    def separate_A_b(self):
+        A = [] # Matriz de coeficientes
+        b = [] # Vector de términos independientes
+
+        for i, row in enumerate(self.get_matriz_values()):
+            A.append(row[:-1])  # Todos los elementos excepto el último
+            b.append(row[-1])   # Solo el último elemento
+
+        return A, b

@@ -1,9 +1,11 @@
-from PyQt5.QtWidgets import QWidget
+from PyQt5.QtWidgets import QWidget, QMessageBox
 from PyQt5.QtCore import Qt
 
 from ui.solver_screen import Ui_solver_screen
 from controllers.navigation_controller import NavigationController
 from controllers.matrix_controller import MatrixController
+
+from controllers.metodos import gauss_seidel, jacobi
 
 class SolverPageController(QWidget, Ui_solver_screen):
     """
@@ -53,6 +55,7 @@ class SolverPageController(QWidget, Ui_solver_screen):
         """
         self._config_matriz()
         self.matrix_controller.print_matriz()
+        self.absolute_solver()
 
     def on_clear_button_clicked(self):
         """
@@ -69,3 +72,20 @@ class SolverPageController(QWidget, Ui_solver_screen):
         self.matrix_controller.change_size(self.matrix_size_slider.value())
 
     # ==================== MÉTODOS AUXILIARES ====================
+
+    def absolute_solver(self):
+        coeficientes, terminos_independientes = self.matrix_controller.separate_A_b()
+        solucion = []
+
+        try:
+            if(self.seleccionar_metodo.currentText() == "Gauss-Seidel"):
+                print("Usando Gauss-Seidel")
+                solucion = gauss_seidel(coeficientes, terminos_independientes)
+                print("Solución:", solucion)
+            elif(self.seleccionar_metodo.currentText() == "Jacobi"):
+                print("Usando Método Jacobi")
+                solucion = jacobi(coeficientes, terminos_independientes)
+                print("Solución:", solucion)
+
+        except ValueError as e:
+            QMessageBox.critical(self, "Error", str(e))
