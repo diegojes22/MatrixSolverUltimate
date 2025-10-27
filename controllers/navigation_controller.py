@@ -3,14 +3,16 @@ from PyQt5.QtWidgets import QStackedWidget, QLabel
 ### Constantes
 MAIN_PAGE_INDEX = 0
 SOLVER_PAGE_INDEX = 1
-CALCULATOR_PAGE_INDEX = 2
-AI_CHAT_PAGE_INDEX = 3
-HELP_PAGE_INDEX = 4
-PREMIUM_AD_PAGE_INDEX = 5
+RESULT_PAGE_INDEX = 2
+CALCULATOR_PAGE_INDEX = 3
+AI_CHAT_PAGE_INDEX = 4
+HELP_PAGE_INDEX = 5
+PREMIUM_AD_PAGE_INDEX = 6
 
 page_titles = {
     MAIN_PAGE_INDEX: "Página Principal",
     SOLVER_PAGE_INDEX: "Resolver Sistema de Ecuaciones",
+    RESULT_PAGE_INDEX: "Resultados",
     CALCULATOR_PAGE_INDEX: "Calculadora",
     AI_CHAT_PAGE_INDEX: "Chat AI",
     HELP_PAGE_INDEX: "Ayuda",

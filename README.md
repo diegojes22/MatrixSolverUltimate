@@ -133,6 +133,7 @@ panel.show()
 
 ```bash
 pip install PyQt5
+pip install numpy
 ```
 
 ---

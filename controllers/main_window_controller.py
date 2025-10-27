@@ -2,11 +2,14 @@
 from PyQt5.QtWidgets import QMainWindow
 from PyQt5.QtCore import Qt
 
+from controllers.result_page_controller import ResultPageController
 from controllers.solver_page_controller import SolverPageController
 from ui.main_window import Ui_main_window
 
 from controllers.main_page_controller import MainPageController
 from controllers.navigation_controller import NavigationController
+
+from controllers.metodos import ResultDetail, ResultHandler, ResultRegister
 
 ### Constantes
 MAIN_PAGE_INDEX = 0
@@ -48,8 +51,18 @@ class MainWindowController(QMainWindow, Ui_main_window):
         """
         # Configuraciones iniciales
         self.setMinimumSize(800, 600)  # Tamano minimo de la ventana
+        self._config_results()
 
         self._define_pages() # definir las paginas del QStackedWidget
+
+    def _config_results(self):
+        '''
+        Configurar la gestión de resultados.
+        '''
+        
+        self.result_handler = ResultHandler()
+        self.result_detail = ResultDetail()
+        self.result_register = ResultRegister(self.result_handler, self.result_detail)
 
     def _define_pages(self):
         """
@@ -58,13 +71,18 @@ class MainWindowController(QMainWindow, Ui_main_window):
         self.navigation_controller.register_workspace(self.workspace)
         self.navigation_controller.register_window_title(self.window_title)
 
-        # Página principal
+        # Página principal (0)
         main_page = MainPageController(navigation_controller=self.navigation_controller)
         self.navigation_controller.add_page(main_page)
 
-        # Página del solver
-        solver_page = SolverPageController(navigation_controller=self.navigation_controller)
+        # Página del solver (1)
+        solver_page = SolverPageController(navigation_controller=self.navigation_controller, result_register=self.result_register)
         self.navigation_controller.add_page(solver_page)
+
+        # Página de resultados (2)
+        result_page = ResultPageController(navigation_controller=self.navigation_controller, result_register=self.result_register)
+        self.navigation_controller.add_page(result_page)
+        self.result_register.register_page(result_page)
 
         # Mostrar la página principal al iniciar
         self.navigation_controller.set_current_page(MAIN_PAGE_INDEX)
