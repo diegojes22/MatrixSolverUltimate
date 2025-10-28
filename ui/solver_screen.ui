@@ -1035,6 +1035,11 @@ color: white;</string>
             <string>Gauss-Seidel</string>
            </property>
           </item>
+          <item>
+           <property name="text">
+            <string>Gauss-Jordan</string>
+           </property>
+          </item>
          </widget>
         </item>
        </layout>
@@ -1111,7 +1116,7 @@ border-radius: 10px;
 color: white;</string>
               </property>
               <property name="text">
-               <string>0.0000001</string>
+               <string>0.000000000001</string>
               </property>
              </widget>
             </item>

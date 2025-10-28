@@ -1,9 +1,9 @@
 from PyQt5.QtWidgets import QStackedWidget, QLabel
 
 ### Constantes
-MAIN_PAGE_INDEX = 0
-SOLVER_PAGE_INDEX = 1
-RESULT_PAGE_INDEX = 2
+MAIN_PAGE_INDEX = 0          # added
+SOLVER_PAGE_INDEX = 1        # added
+RESULT_PAGE_INDEX = 2        # added
 CALCULATOR_PAGE_INDEX = 3
 AI_CHAT_PAGE_INDEX = 4
 HELP_PAGE_INDEX = 5

@@ -5,7 +5,7 @@ from ui.solver_screen import Ui_solver_screen
 from controllers.navigation_controller import NavigationController, RESULT_PAGE_INDEX
 from controllers.matrix_controller import MatrixController
 
-from controllers.metodos import gauss_seidel, jacobi, ResultDetail, ResultHandler, ResultInterfaceRegister, ResultRegister
+from controllers.metodos import gauss_jordan, gauss_seidel, jacobi, ResultDetail, ResultHandler, ResultInterfaceRegister, ResultRegister
 from controllers.result_detail_dialog_controller import ResultDetailDialogController
 
 import time
@@ -108,6 +108,11 @@ class SolverPageController(QWidget, Ui_solver_screen, ResultInterfaceRegister):
             elif(self.seleccionar_metodo.currentText() == "Jacobi"):
                 tmp_solucion, detail.total_iterations, detail.converged = jacobi(coeficientes, terminos_independientes, tol=tol, max_iter=max_iter)
 
+            elif(self.seleccionar_metodo.currentText() == "Gauss-Jordan"):
+                tmp_solucion = gauss_jordan(coeficientes, terminos_independientes)
+                detail.total_iterations = 1
+                detail.converged = True
+                
             # obtener tiempo de ejecucion
             after = time.time()
             detail.execution_time = after - now

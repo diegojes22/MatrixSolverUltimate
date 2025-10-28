@@ -151,3 +151,45 @@ pip install numpy
 
 - [Documentación PyQt5](https://www.riverbankcomputing.com/static/Docs/PyQt5/)
 - [Qt Designer Tutorial](https://doc.qt.io/qt-5/qtdesigner-manual.html)
+
+---
+
+## 📦 Compilar a Ejecutable
+
+### **Método Rápido (Recomendado)**
+
+**Opción 1 - PowerShell:**
+```powershell
+.\compile.ps1
+```
+
+**Opción 2 - CMD:**
+```cmd
+compile.bat
+```
+
+**Opción 3 - Python directo:**
+```powershell
+pip install pyinstaller
+python build_executable.py
+```
+
+### **Ubicación del ejecutable**
+```
+dist/MatrixSolverUltimate.exe
+```
+
+### **Documentación detallada**
+Para opciones avanzadas de compilación, revisa: [COMPILACION.md](COMPILACION.md)
+
+---
+
+## 🎯 Comandos Rápidos
+
+| Acción | Comando |
+|--------|---------|
+| Activar entorno | `.\env\Scripts\Activate.ps1` |
+| Regenerar UI | `python build_ui.py` |
+| Ejecutar app | `python main.py` |
+| Compilar a .exe | `.\compile.ps1` o `python build_executable.py` |
+| Instalar deps | `pip install -r requirements.txt` |

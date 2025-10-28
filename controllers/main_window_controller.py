@@ -8,6 +8,7 @@ from ui.main_window import Ui_main_window
 
 from controllers.main_page_controller import MainPageController
 from controllers.navigation_controller import NavigationController
+from controllers.calculator_controller import CalculatorController
 
 from controllers.metodos import ResultDetail, ResultHandler, ResultRegister
 
@@ -83,6 +84,10 @@ class MainWindowController(QMainWindow, Ui_main_window):
         result_page = ResultPageController(navigation_controller=self.navigation_controller, result_register=self.result_register)
         self.navigation_controller.add_page(result_page)
         self.result_register.register_page(result_page)
+
+        # Página de la calculadora (3)
+        calculator = CalculatorController()
+        self.navigation_controller.add_page(calculator)
 
         # Mostrar la página principal al iniciar
         self.navigation_controller.set_current_page(MAIN_PAGE_INDEX)

@@ -8,6 +8,7 @@ from PyQt5.QtCore import Qt
 
 # Importamos la interfaz generada desde la carpeta ui
 from ui.main_page import Ui_main_screen
+from controllers.easter_egg_controller import EasterEggController
 from controllers.navigation_controller import NavigationController, SOLVER_PAGE_INDEX, CALCULATOR_PAGE_INDEX, AI_CHAT_PAGE_INDEX, HELP_PAGE_INDEX
 
 class MainPageController(QWidget, Ui_main_screen):
@@ -37,6 +38,8 @@ class MainPageController(QWidget, Ui_main_screen):
         self.access_for_calculator.mousePressEvent = self.on_calculator_clicked
         self.access_to_chat.mousePressEvent = self.on_chat_clicked
         self.access_to_help.mousePressEvent = self.on_help_clicked
+
+        self.access_to_help.mouseDoubleClickEvent = self.on_easter_egg_invoked
 
         # Tooltip para ayuda
         self.access_to_help.setToolTip("Mirar la ayuda")
@@ -80,6 +83,10 @@ class MainPageController(QWidget, Ui_main_screen):
         """
         print("Mostrando ayuda...")
         # Lógica para mostrar ayuda
+
+    def on_easter_egg_invoked(self, event):
+        easter_egg = EasterEggController(self)
+        easter_egg.exec_()
     
     # ==================== MÉTODOS DE LÓGICA DE NEGOCIO ====================
     

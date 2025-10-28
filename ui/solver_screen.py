@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'D:\CodeProjects\MatrixSolver\python-edition\ui\solver_screen.ui'
+# Form implementation generated from reading ui file 'D:\CodeProjects\MatrixSolverUltimate\ui\solver_screen.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.11
 #
@@ -525,6 +525,7 @@ class Ui_solver_screen(object):
         self.seleccionar_metodo.setObjectName("seleccionar_metodo")
         self.seleccionar_metodo.addItem("")
         self.seleccionar_metodo.addItem("")
+        self.seleccionar_metodo.addItem("")
         self.layout_for_metodo.addWidget(self.seleccionar_metodo)
         self.verticalLayout_2.addLayout(self.layout_for_metodo)
         self.layout_for_presicion = QtWidgets.QVBoxLayout()
@@ -729,9 +730,10 @@ class Ui_solver_screen(object):
         self.label_for_metodo.setText(_translate("solver_screen", "Modelo"))
         self.seleccionar_metodo.setItemText(0, _translate("solver_screen", "Jacobi"))
         self.seleccionar_metodo.setItemText(1, _translate("solver_screen", "Gauss-Seidel"))
+        self.seleccionar_metodo.setItemText(2, _translate("solver_screen", "Gauss-Jordan"))
         self.label_for_precision.setText(_translate("solver_screen", "Precision"))
         self.label_for_tolerancia.setText(_translate("solver_screen", "Tolerancia"))
-        self.tolerancia_field.setText(_translate("solver_screen", "0.0000001"))
+        self.tolerancia_field.setText(_translate("solver_screen", "0.000000000001"))
         self.label_for_iteraciones_maximas.setText(_translate("solver_screen", "Iteraciones maximas"))
         self.iteraciones_maximas_field.setText(_translate("solver_screen", "100"))
         self.tag_for_slider.setText(_translate("solver_screen", "Tamaño"))

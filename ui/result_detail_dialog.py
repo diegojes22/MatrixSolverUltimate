@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'D:\CodeProjects\MatrixSolver\python-edition\ui\result_detail_dialog.ui'
+# Form implementation generated from reading ui file 'D:\CodeProjects\MatrixSolverUltimate\ui\result_detail_dialog.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.11
 #

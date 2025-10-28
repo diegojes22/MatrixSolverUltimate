@@ -245,3 +245,70 @@ def gauss_seidel(A, b, tol=1e-10, max_iter=1000):
             return x, iter_count + 1, True
     
     return x, max_iter, False
+
+def gauss_jordan(A, b):
+    """
+    Método de Gauss-Jordan para resolver sistemas de ecuaciones lineales Ax = b
+    con pivoteo parcial para mayor estabilidad numérica.
+    
+    Parámetros:
+    -----------
+    A : array_like
+        Matriz de coeficientes (n x n)
+    b : array_like
+        Vector de términos independientes (n)
+    
+    Retorna:
+    --------
+    x : ndarray
+        Vector solución
+    
+    Raises:
+    -------
+    ValueError
+        Si las dimensiones no son compatibles o la matriz es singular
+    """
+    A = np.array(A, dtype=float)
+    b = np.array(b, dtype=float)
+    
+    # Validar dimensiones
+    if A.ndim != 2 or A.shape[0] != A.shape[1]:
+        raise ValueError("La matriz A debe ser cuadrada")
+    
+    n = A.shape[0]
+    
+    if b.shape[0] != n:
+        raise ValueError("Las dimensiones de A y b no son compatibles")
+    
+    # Construir la matriz aumentada
+    Ab = np.hstack([A, b.reshape(-1, 1)])
+    
+    # Proceso de eliminación de Gauss-Jordan con pivoteo parcial
+    for i in range(n):
+        # Pivoteo parcial: buscar el elemento máximo en la columna i
+        max_row = i
+        for k in range(i + 1, n):
+            if abs(Ab[k, i]) > abs(Ab[max_row, i]):
+                max_row = k
+        
+        # Intercambiar filas si es necesario
+        if max_row != i:
+            Ab[[i, max_row]] = Ab[[max_row, i]]
+        
+        # Verificar si el pivote es cero (matriz singular)
+        if abs(Ab[i, i]) < 1e-10:
+            raise ValueError("La matriz es singular o casi singular. No se puede resolver el sistema.")
+        
+        # Normalizar la fila del pivote (hacer el elemento diagonal igual a 1)
+        Ab[i] = Ab[i] / Ab[i, i]
+        
+        # Hacer los demás elementos de la columna igual a 0
+        for j in range(n):
+            if j != i:
+                Ab[j] = Ab[j] - Ab[j, i] * Ab[i]
+    
+    # La solución está en la última columna
+    x = Ab[:, -1]
+    print(x)
+    
+    return x

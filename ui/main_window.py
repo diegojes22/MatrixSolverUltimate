@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'D:\CodeProjects\MatrixSolver\python-edition\ui\main_window.ui'
+# Form implementation generated from reading ui file 'D:\CodeProjects\MatrixSolverUltimate\ui\main_window.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.11
 #
@@ -50,7 +50,7 @@ class Ui_main_window(object):
 "color: rgb(255, 255, 255);\n"
 "border-radius: 10px;")
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("D:\\CodeProjects\\MatrixSolver\\python-edition\\ui\\../source/img/icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("D:\\CodeProjects\\MatrixSolverUltimate\\ui\\../source/img/icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.btn_for_back_main_page.setIcon(icon)
         self.btn_for_back_main_page.setObjectName("btn_for_back_main_page")
         self.horizontalLayout.addWidget(self.btn_for_back_main_page)
