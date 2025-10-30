@@ -129,7 +129,8 @@ class SolverPageController(QWidget, Ui_solver_screen, ResultInterfaceRegister):
             self.result_register.notify()
 
             # ir a la página de resultados
-            self.navigation_controller.set_current_page(RESULT_PAGE_INDEX)
+            if detail.converged:
+                self.navigation_controller.set_current_page(RESULT_PAGE_INDEX)
 
             # Mostrar detalles en un diálogo
             results_dialog = ResultDetailDialogController(detail, self)
@@ -152,7 +153,7 @@ class SolverPageController(QWidget, Ui_solver_screen, ResultInterfaceRegister):
         max_iter = int(self.iteraciones_maximas_field.text())
 
         # valiudar que no sea muy grande
-        if max_iter > 10000:
+        if max_iter > 9999:
             reply = QMessageBox.question(self, 
                                          'Advertencia',
                                          "El número máximo de iteraciones es muy alto y puede causar que la aplicación se congele. ¿Desea continuar?",

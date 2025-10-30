@@ -82,6 +82,7 @@ class CalculatorController(QWidget, Ui_Form):
         if self.new_operation:
             self.current_value = "0."
             self.new_operation = False
+
         elif "." not in self.current_value:
             if not self.current_value:
                 self.current_value = "0."
@@ -121,6 +122,7 @@ class CalculatorController(QWidget, Ui_Form):
         """
         self.current_value = ""
         self.previous_value = ""
+        
         self.operation = None
         self.new_operation = True
         self.calculator_screen.display(0)
